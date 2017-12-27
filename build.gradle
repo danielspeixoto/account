@@ -36,9 +36,16 @@ dependencies {
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
-    compile 'com.graphql-java:graphql-spring-boot-starter:3.9.2'
+    // https://mvnrepository.com/artifact/com.graphql-java/graphql-java
+    compile group: 'com.graphql-java', name: 'graphql-java', version: '6.0'
+    // https://mvnrepository.com/artifact/com.graphql-java/graphql-java-tools
+    compile group: 'com.graphql-java', name: 'graphql-java-tools', version: '4.3.0'
+    // https://mvnrepository.com/artifact/com.graphql-java/graphql-java-servlet
+    compile group: 'com.graphql-java', name: 'graphql-java-servlet', version: '4.7.0'
+    // https://mvnrepository.com/artifact/com.graphql-java/graphql-spring-boot-starter
+    compile group: 'com.graphql-java', name: 'graphql-spring-boot-starter', version: '3.10.0'
     // to embed GraphiQL tool
-    compile 'com.graphql-java:graphiql-spring-boot-starter:3.9.2'
+    compile 'com.graphql-java:graphiql-spring-boot-starter:3.10.0'
 }
 
 compileKotlin {
