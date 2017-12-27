@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = [app.Application::class]
 )
-class HelloControllerTest {
+class AuthControllerTest {
 
     @LocalServerPort
     private val port: Int = 0
@@ -38,9 +38,11 @@ class HelloControllerTest {
 
     @Test
     @Throws(Exception::class)
-    fun auth_correctInput_returnsValidAuth() {
-        val response = template!!.getForEntity(base!!.toString(),
-                String::class.java)
+    fun authCorrectInputReturnsValidAuth() {
+        val response =
+                template!!
+                        .getForEntity(base!!.toString(),
+                                String::class.java)
         assertThat(response.body, equalTo("Auth"))
     }
 }

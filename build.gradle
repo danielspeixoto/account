@@ -10,14 +10,12 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
-apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 
 repositories {
@@ -39,6 +37,7 @@ dependencies {
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
+    // GraphQL
     // https://mvnrepository.com/artifact/com.graphql-java/graphql-java
     compile group: 'com.graphql-java', name: 'graphql-java', version: '6.0'
     // https://mvnrepository.com/artifact/com.graphql-java/graphql-java-tools
