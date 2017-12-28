@@ -28,6 +28,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]
     // tag::actuator[]
@@ -36,6 +37,7 @@ dependencies {
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
+    // GraphQL
     // https://mvnrepository.com/artifact/com.graphql-java/graphql-java
     compile group: 'com.graphql-java', name: 'graphql-java', version: '6.0'
     // https://mvnrepository.com/artifact/com.graphql-java/graphql-java-tools
