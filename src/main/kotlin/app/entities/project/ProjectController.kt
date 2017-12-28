@@ -10,7 +10,10 @@ class ProjectController @Autowired constructor(
 ) {
 
     fun projects(idList: List<String>, user: User): List<Project> {
-        // TODO Check if user has permissions to see those projects
-        return repository.findAll(idList) as List<Project>
+        // A user can only sees public projects or private projects
+        // he is part of
+        return (repository.findAll(idList) as List<Project>).filter {
+            it.isPublic || it.membersIds.contains(user.id)
+        }
     }
 }
