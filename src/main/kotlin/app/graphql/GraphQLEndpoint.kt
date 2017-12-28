@@ -1,7 +1,6 @@
 package app.graphql
 
 import app.entities.project.ProjectResolver
-import app.entities.user.User
 import app.entities.user.UserRepository
 import app.entities.user.UserResolver
 import com.coxautodev.graphql.tools.SchemaParser
@@ -31,13 +30,14 @@ class GraphQLEndpoint @Autowired constructor(
                 .makeExecutableSchema()
 ) {
 
+    // Receives a JWT Token and maps it to a User
     override fun createContext(request: Optional<HttpServletRequest>?, response: Optional<HttpServletResponse>?): GraphQLContext {
         val user = request!!
                 .map { req -> req.getHeader("Authorization") }
                 .filter { id -> !id.isEmpty() }
                 .map { id -> id.replace("Bearer ", "") }
                 .map(userRepository::findById)
-        .orElse(null)
-        return AuthContext(User("ds"), request, response!!)
+                .orElse(null)
+        return AuthContext(user, request, response!!)
     }
 }
