@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class AuthContext(
-        val user : User,
+        val user : User?,
         request : Optional<HttpServletRequest>,
         response : Optional<HttpServletResponse>
 ) : GraphQLContext(request, response)

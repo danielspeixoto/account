@@ -1,7 +1,10 @@
 package repositories
 
+import app.Application
 import app.entities.user.User
 import app.entities.user.UserRepository
+import config.Config
+import org.junit.Assert
 import org.junit.runner.RunWith
 import org.junit.Before
 import org.junit.Test
@@ -11,9 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 
 @RunWith(SpringRunner::class)
-@SpringBootTest(
-        classes = [app.Application::class]
-)
+@SpringBootTest(classes = [Application::class])
 class UserRepositoryTest {
 
     private val list = listOf(
@@ -38,7 +39,7 @@ class UserRepositoryTest {
     @Test
     fun insertedItemsCanBeRetrieved() {
         val list = repository.findAll()
-        assert(this.list == list)
+        Assert.assertEquals(this.list, list)
     }
 
     @Test

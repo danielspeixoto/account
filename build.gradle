@@ -1,30 +1,43 @@
 group 'account'
 version '1.0-SNAPSHOT'
 
+
 buildscript {
-    ext.kotlin_version = '1.2.0-rc-39'
+    ext {
+        kotlinVersion = "1.2.10"
+        springBootVersion = '1.5.9.RELEASE'
+    }
 
     repositories {
-        maven {     url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
         mavenCentral()
+        maven {     url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
-    maven {     url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
     mavenCentral()
+    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+    classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
+
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }

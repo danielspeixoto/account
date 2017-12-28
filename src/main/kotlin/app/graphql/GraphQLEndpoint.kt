@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class GraphQLEndpoint @Autowired constructor(
-        query: Query,
+open class GraphQLEndpoint @Autowired constructor(
+        queryResolver: QueryResolver,
         userResolver: UserResolver,
         projectResolver: ProjectResolver,
         private val userRepository : UserRepository
@@ -22,7 +22,7 @@ class GraphQLEndpoint @Autowired constructor(
         SchemaParser.newParser()
                 .file("schema.graphqls")
                 .resolvers(
-                        query,
+                        queryResolver,
                         userResolver,
                         projectResolver
                 )
