@@ -6,6 +6,7 @@ buildscript {
     ext {
         kotlinVersion = "1.2.0-rc-39"
         springBootVersion = '1.5.9.RELEASE'
+        apolloGraphqlVersion = '0.4.3'
     }
 
     repositories {
@@ -13,15 +14,21 @@ buildscript {
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath "com.apollographql.apollo:apollo-gradle-plugin:${apolloGraphqlVersion }"
     }
 }
 
+apply plugin: 'android'
+apply plugin: 'com.apollographql.android'
 apply plugin: 'kotlin'
+// This is here only because of apollo check if it causes any damage
+//apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -31,6 +38,7 @@ repositories {
     maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
     maven { url "https://repo.spring.io/snapshot" }
     maven { url "https://repo.spring.io/milestone" }
+    jcenter()
 }
 
 dependencies {
@@ -63,6 +71,7 @@ dependencies {
     compile group: 'com.graphql-java', name: 'graphql-spring-boot-starter', version: '3.10.0'
     // to embed GraphiQL tool
     compile 'com.graphql-java:graphiql-spring-boot-starter:3.10.0'
+    compile "com.apollographql.apollo:apollo-runtime:${apolloGraphqlVersion }"
 
 }
 

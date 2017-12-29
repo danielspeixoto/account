@@ -34,13 +34,16 @@ class GraphQLEndpoint @Autowired constructor(
 ) {
 
     // Receives a Encrypted Token and maps it to a User
-    override fun createContext(request: Optional<HttpServletRequest>?, response: Optional<HttpServletResponse>?): GraphQLContext {
+    override fun createContext(request: Optional<HttpServletRequest>?,
+                               response: Optional<HttpServletResponse>?): GraphQLContext {
         var user: User? = null
-        val userId = authRequest.userIdFromRequest(request!!.get())
-        userId?.let {
-            user = userRepository.findById(userId)
+        if (request != null && request.isPresent) {
+            val userId = authRequest.userIdFromRequest(request.get())
+            userId?.let {
+                user = userRepository.findById(userId)
+            }
         }
-        return AuthContext(request, response!!, user)
+        return AuthContext(request, response, user)
     }
 
 

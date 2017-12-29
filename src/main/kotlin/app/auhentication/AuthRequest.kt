@@ -15,7 +15,7 @@ class AuthRequest @Autowired constructor(
 
     fun userIdFromRequest(request: HttpServletRequest): String? {
         val authHeader = request.getHeader(AUTHORIZATION_HEADER)
-        if (!authHeader.isEmpty()) {
+        if (authHeader != null && !authHeader.isEmpty()) {
             return encryption.decrypt(authHeader)
         }
         return null
