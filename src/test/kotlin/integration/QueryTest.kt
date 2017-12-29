@@ -40,7 +40,23 @@ class QueryTest {
 
     @Test
     fun queryUsersReturnsAllUsers() {
-        Assert.assertEquals(endpoint.executeQuery("""
+//        endpoint.servlet.addListener(object : GraphQLServletListener{
+//            override fun onOperation(context: GraphQLContext?, operationName: String?, query: String?, variables: MutableMap<String, Any>?): GraphQLServletListener.OperationCallback {
+//                println("Context")
+//                println(context)
+//                println(operationName)
+//                println(query)
+//                return super.onOperation(context, operationName, "", variables)
+//            }
+//
+//            override fun onRequest(request: HttpServletRequest?, response: HttpServletResponse?): GraphQLServletListener.RequestCallback {
+//                println("request")
+//                println(request.toString())
+//                println(response)
+//                return super.onRequest(null, response)
+//            }
+//        })
+        Assert.assertEquals(endpoint.servlet.executeQuery("""
             {
 	            users {
                     email

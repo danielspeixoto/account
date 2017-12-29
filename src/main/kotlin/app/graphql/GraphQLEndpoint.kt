@@ -21,23 +21,25 @@ class GraphQLEndpoint @Autowired constructor(
         projectResolver: ProjectResolver,
         private val userRepository: UserRepository,
         private val authRequest: AuthRequest
-) : SimpleGraphQLServlet(
-        SchemaParser.newParser()
-                .file("schema.graphqls")
-                .resolvers(
-                        queryResolver,
-                        userResolver,
-                        projectResolver
-                )
-                .build()
-                .makeExecutableSchema()
 ) {
 
+    val servlet = SimpleGraphQLServlet.builder(SchemaParser.newParser()
+            .file("schema.graphqls")
+            .resolvers(
+                    queryResolver,
+                    userResolver,
+                    projectResolver
+            )
+            .build()
+            .makeExecutableSchema())
+            .withGraphQLContextBuilder(::createContext)
+            .build()!!
+
     // Receives a Encrypted Token and maps it to a User
-    override fun createContext(request: Optional<HttpServletRequest>?,
-                               response: Optional<HttpServletResponse>?): GraphQLContext {
+    fun createContext(request: Optional<HttpServletRequest>,
+                      response: Optional<HttpServletResponse>): GraphQLContext {
         var user: User? = null
-        if (request != null && request.isPresent) {
+        request.ifPresent {
             val userId = authRequest.userIdFromRequest(request.get())
             userId?.let {
                 user = userRepository.findById(userId)
