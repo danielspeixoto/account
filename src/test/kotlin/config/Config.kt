@@ -11,35 +11,35 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 
 @Configuration
-open class Config {
+class Config {
 
     @Bean
     @Primary
-    open fun userRepository(): UserRepository {
+    fun userRepository(): UserRepository {
         return Mockito.mock(UserRepository::class.java)
     }
 
     @Bean
     @Primary
-    open fun projectRepository(): ProjectRepository {
+    fun projectRepository(): ProjectRepository {
         return Mockito.mock(ProjectRepository::class.java)
     }
 
     @Bean
     @Primary
-    open fun userResolver(): UserResolver {
+    fun userResolver(): UserResolver {
         return Mockito.mock(UserResolver::class.java)
     }
 
     @Bean
     @Primary
-    open fun projectResolver(): ProjectResolver {
+    fun projectResolver(): ProjectResolver {
         return Mockito.mock(ProjectResolver::class.java)
     }
 
     @Bean
     @Primary
-    open fun queryResolver(): QueryResolver {
+    fun queryResolver(): QueryResolver {
         return Mockito.mock(QueryResolver::class.java)
     }
 

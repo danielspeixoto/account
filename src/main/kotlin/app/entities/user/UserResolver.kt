@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-open class UserResolver @Autowired constructor(
+class UserResolver @Autowired constructor(
         private val userController : UserController,
         private val projectController : ProjectController
 ) : GraphQLResolver<User> {

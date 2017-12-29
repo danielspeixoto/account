@@ -4,13 +4,13 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext {
-        kotlinVersion = "1.2.10"
+        kotlinVersion = "1.2.0-rc-39"
         springBootVersion = '1.5.9.RELEASE'
     }
 
     repositories {
         mavenCentral()
-        maven {     url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
@@ -35,8 +35,8 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    compile("org.jetbrains.kotlin:kotlin-reflect")
-    classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2")
 
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
@@ -50,6 +50,8 @@ dependencies {
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
+    compile 'io.jsonwebtoken:jjwt:0.9.0'
+
     // GraphQL
     // https://mvnrepository.com/artifact/com.graphql-java/graphql-java
     compile group: 'com.graphql-java', name: 'graphql-java', version: '6.0'
@@ -61,6 +63,7 @@ dependencies {
     compile group: 'com.graphql-java', name: 'graphql-spring-boot-starter', version: '3.10.0'
     // to embed GraphiQL tool
     compile 'com.graphql-java:graphiql-spring-boot-starter:3.10.0'
+
 }
 
 compileKotlin {
