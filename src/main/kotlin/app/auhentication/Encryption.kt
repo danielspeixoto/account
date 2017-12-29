@@ -1,5 +1,6 @@
 package app.auhentication
 
+import app.helpers.Convert
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,12 +21,14 @@ class Encryption @Autowired constructor(
 
     private val key = environment.getProperty(JWT_KEY)
     private val algorithm = SignatureAlgorithm.HS256
-    // 7 days
-    private val maxExpiration = Instant.now().plusMillis(1000 * 60 * 60 * 24 * 7)
+    private val maxExpiration = Date.from(
+            Instant.now()
+                    .plusMillis(
+                            Convert.daysToMillis(8)))
 
     fun encrypt(subject: String,
-                expiration: Date = Date.from(maxExpiration)): String {
-        if (expiration > Date.from(maxExpiration)) {
+                expiration: Date = maxExpiration): String {
+        if (expiration > maxExpiration) {
             return encrypt(subject)
         }
         return Jwts.builder()
