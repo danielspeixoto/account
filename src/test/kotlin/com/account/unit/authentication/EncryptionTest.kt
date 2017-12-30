@@ -1,7 +1,7 @@
-package unit.authentication
+package com.account.unit.authentication
 
 import app.auhentication.Encryption
-import config.Config
+import com.account.config.Config
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

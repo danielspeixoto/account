@@ -1,16 +1,13 @@
-package unit.entities.user
+package com.account.unit.entities.user
 
 import app.entities.project.Project
-import app.entities.project.ProjectController
-import app.entities.project.ProjectRepository
 import app.entities.user.User
 import app.entities.user.UserController
 import app.entities.user.UserRepository
-import config.Config
+import com.account.config.Config
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

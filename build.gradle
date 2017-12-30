@@ -40,36 +40,36 @@ repositories {
 }
 
 dependencies {
+    // Testing
+    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+
+    // Reflection
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2")
 
+    // Spring
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-jetty")
-    // end::jetty[]
-    // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    // end::actuator[]
-    testCompile("junit:junit")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
 
+    // JWT
     compile 'io.jsonwebtoken:jjwt:0.9.0'
 
     // GraphQL
-    // https://mvnrepository.com/artifact/com.graphql-java/graphql-java
     compile group: 'com.graphql-java', name: 'graphql-java', version: '6.0'
-    // https://mvnrepository.com/artifact/com.graphql-java/graphql-java-tools
     compile group: 'com.graphql-java', name: 'graphql-java-tools', version: '4.3.0'
-    // https://mvnrepository.com/artifact/com.graphql-java/graphql-java-servlet
     compile group: 'com.graphql-java', name: 'graphql-java-servlet', version: '4.7.0'
-    // https://mvnrepository.com/artifact/com.graphql-java/graphql-spring-boot-starter
     compile group: 'com.graphql-java', name: 'graphql-spring-boot-starter', version: '3.10.0'
-    // to embed GraphiQL tool
     compile 'com.graphql-java:graphiql-spring-boot-starter:3.10.0'
     compile "com.apollographql.apollo:apollo-runtime:${apolloGraphqlVersion}"
+    // https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp
+    compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
+
 }
 
 compileKotlin {

@@ -1,4 +1,4 @@
-package unit.entities.project
+package com.account.unit.entities.project
 
 import app.entities.project.Project
 import app.entities.project.ProjectController
