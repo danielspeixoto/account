@@ -15,6 +15,6 @@ class UserResolver @Autowired constructor(
 
     fun projects(user : User, env : DataFetchingEnvironment) =
             projectController.projects(user.projectsId,
-                    env.getContext<AuthContext>().user)
+                    env.getContext<AuthContext>().userId)
 
 }

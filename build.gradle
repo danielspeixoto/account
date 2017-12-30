@@ -24,11 +24,9 @@ buildscript {
     }
 }
 
-apply plugin: 'android'
+apply plugin: 'java'
 apply plugin: 'com.apollographql.android'
 apply plugin: 'kotlin'
-// This is here only because of apollo check if it causes any damage
-//apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -71,8 +69,7 @@ dependencies {
     compile group: 'com.graphql-java', name: 'graphql-spring-boot-starter', version: '3.10.0'
     // to embed GraphiQL tool
     compile 'com.graphql-java:graphiql-spring-boot-starter:3.10.0'
-    compile "com.apollographql.apollo:apollo-runtime:${apolloGraphqlVersion }"
-
+    compile "com.apollographql.apollo:apollo-runtime:${apolloGraphqlVersion}"
 }
 
 compileKotlin {
