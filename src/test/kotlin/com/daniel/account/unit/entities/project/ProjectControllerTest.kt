@@ -1,5 +1,3 @@
-package unit.entities.project
-
 import app.entities.project.Project
 import app.entities.project.ProjectController
 import app.entities.project.ProjectRepository

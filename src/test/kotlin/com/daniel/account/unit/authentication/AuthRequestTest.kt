@@ -1,8 +1,8 @@
-package unit.authentication
+package app.unit.authentication
 
 import app.auhentication.AuthRequest
 import app.auhentication.Encryption
-import config.Config
+import com.daniel.account.config.Config
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

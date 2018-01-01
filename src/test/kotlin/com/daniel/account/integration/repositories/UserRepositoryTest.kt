@@ -1,4 +1,4 @@
-package repositories
+package com.daniel.account.integration.repositories
 
 import app.Application
 import app.entities.user.User

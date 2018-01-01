@@ -1,4 +1,4 @@
-package system
+package com.daniel.account.system
 
 import app.Application
 import app.entities.user.User
@@ -7,6 +7,7 @@ import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
+import com.daniel.account.UserQuery
 import okhttp3.OkHttpClient
 import org.junit.Assert
 import org.junit.Before
@@ -60,8 +61,8 @@ class QueryTest {
             }
 
             override fun onResponse(response: Response<UserQuery.Data>) {
-                val result = response.data()!!.users!!.map {
-                    User(it.email/*, id=it.id*/)
+                val result = response.data()!!.users()!!.map {
+                    User(it.email(), id = it.id())
                 }
                 Assert.assertEquals(list, result)
             }

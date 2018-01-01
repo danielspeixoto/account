@@ -73,35 +73,25 @@ dependencies {
 }
 
 
-def generatedSources = "$buildDir/generated"
-def generatedOutputDir = file("$generatedSources")
+def generatedOutputDir = file("$buildDir/generated/source")
 
 compileTestKotlin {
-    dependsOn(generateApolloClasses)
     kotlinOptions.jvmTarget = "1.8"
     source += generatedOutputDir
 }
 
 sourceSets {
-
     generated {
-        java.srcDir "${buildDir}/generated/source/apollo"
-    }
-
-    test {
-        java {
-            compileClasspath += generated.output
-            runtimeClasspath += generated.output
-        }
+        java.srcDir "${generatedOutputDir}/apollo"
     }
 }
 
-compileGeneratedJava{
+compileGeneratedJava {
     dependsOn(generateApolloClasses)
     classpath = configurations.compile
 }
 
-compileJava{
+compileJava {
     dependsOn(compileGeneratedJava)
     source    += sourceSets.generated.java
 }

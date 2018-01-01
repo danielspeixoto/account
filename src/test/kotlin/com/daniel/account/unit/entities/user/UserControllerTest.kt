@@ -1,10 +1,10 @@
-package unit.entities.user
+package app.unit.entities.user
 
 import app.entities.project.Project
 import app.entities.user.User
 import app.entities.user.UserController
 import app.entities.user.UserRepository
-import config.Config
+import com.daniel.account.config.Config
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
