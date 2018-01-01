@@ -3,8 +3,10 @@ package app.auhentication
 import app.entities.user.User
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken
 import com.google.api.client.json.jackson2.JacksonFactory
+import org.springframework.stereotype.Component
 
-object SocialOAuth {
+@Component
+class SocialOAuth {
 
     // TODO Add verification to check from which client the token came from
 
@@ -13,7 +15,7 @@ object SocialOAuth {
             val idToken = GoogleIdToken.parse(JacksonFactory.getDefaultInstance(), tokenStr)
             idToken?.let {
                 val payload = idToken.payload
-                return User(payload)
+                return User("")
             }
         } catch (e: Exception) {
             e.printStackTrace()

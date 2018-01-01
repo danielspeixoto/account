@@ -1,5 +1,6 @@
 package com.daniel.account.config
 
+import app.auhentication.SocialOAuth
 import app.entities.project.ProjectController
 import app.entities.project.ProjectRepository
 import app.entities.project.ProjectResolver
@@ -73,6 +74,12 @@ class Config {
     @Primary
     fun queryResolver(): QueryResolver {
         return QueryResolver(userController, projectController)
+    }
+
+    @Bean
+    @Primary
+    fun socialOAuth(): SocialOAuth {
+        return SocialOAuth()
     }
 
 }
