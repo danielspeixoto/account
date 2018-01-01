@@ -1,4 +1,4 @@
-package com.account.config
+package config
 
 import app.entities.project.ProjectController
 import app.entities.project.ProjectRepository

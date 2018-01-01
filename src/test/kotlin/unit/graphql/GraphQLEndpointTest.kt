@@ -1,4 +1,4 @@
-package com.account.unit.graphql
+package unit.graphql
 
 import app.auhentication.AuthRequest
 import app.entities.project.ProjectResolver
@@ -7,7 +7,7 @@ import app.entities.user.UserResolver
 import app.graphql.AuthContext
 import app.graphql.GraphQLEndpoint
 import app.graphql.QueryResolver
-import com.account.config.Config
+import config.Config
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

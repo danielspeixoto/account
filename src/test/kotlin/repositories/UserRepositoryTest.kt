@@ -1,4 +1,4 @@
-package com.account.integration.repositories
+package repositories
 
 import app.Application
 import app.entities.user.User

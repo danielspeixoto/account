@@ -1,4 +1,4 @@
-package com.account.unit.helpers
+package unit.helpers
 
 import app.helpers.Convert
 import org.junit.Assert
