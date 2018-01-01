@@ -83,29 +83,28 @@ compileTestKotlin {
 }
 
 sourceSets {
-    generated{
-        java.srcDir "${buildDir}/generated/"
+
+    generated {
+        java.srcDir "${buildDir}/generated/source/apollo"
+    }
+
+    test {
+        java {
+            compileClasspath += generated.output
+            runtimeClasspath += generated.output
+        }
     }
 }
 
-//sourceSets {
-//    main {
-//        java {
-//            srcDirs += generatedOutputDir
-//        }
-//    }
-//
-//    test {
-//        java {
-//            srcDirs += generatedOutputDir
-//        }
-//    }
-//
-////    test {
-////        compileClasspath += generated.output
-////        runtimeClasspath += generated.output
-////    }
-//}
+compileGeneratedJava{
+    dependsOn(generateApolloClasses)
+    classpath = configurations.compile
+}
+
+compileJava{
+    dependsOn(compileGeneratedJava)
+    source    += sourceSets.generated.java
+}
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
