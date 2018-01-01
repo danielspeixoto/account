@@ -1,7 +1,15 @@
-type Query {
-    hello: String
+type Project {
+    id : String
+    name : String!
+    admin : User!
 }
 
-schema {
-    query: Query
+type User {
+    id : String
+    email : String!,
+    projects : [Project]
+}
+
+type Query {
+    users : [User]
 }
