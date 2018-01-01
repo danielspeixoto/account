@@ -1,17 +1,11 @@
 package app.unit.authentication
 
 import app.auhentication.Encryption
-import com.daniel.account.config.Config
 import org.junit.Assert
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mockito
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.core.env.Environment
-import org.springframework.test.context.junit4.SpringRunner
 
-@RunWith(SpringRunner::class)
-@SpringBootTest(classes = [Config::class])
 class EncryptionTest {
 
     private val environment = Mockito.mock(Environment::class.java)

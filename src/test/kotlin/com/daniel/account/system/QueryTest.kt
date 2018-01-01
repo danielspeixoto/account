@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(
@@ -39,6 +41,10 @@ class QueryTest {
             User("d@mail.com")
     )
 
+    companion object {
+        private val TIMEOUT: Long = 2_000
+    }
+
     @Before
     @Throws(Exception::class)
     fun setUp() {
@@ -50,27 +56,40 @@ class QueryTest {
         repository.deleteAll()
     }
 
-    @Test(timeout = 5000)
+    @Test
     fun queryUsersReturnsAllUsers() {
+        // SETUP
+        val countdown = CountDownLatch(1)
+        var result: Response<UserQuery.Data>? = null
+
+        // ACT
         repository.insert(list)
         apollo.query(
                 UserQuery.builder().build()
         ).enqueue(object : ApolloCall.Callback<UserQuery.Data>() {
             override fun onFailure(e: ApolloException) {
-                Assert.fail()
+                e.printStackTrace()
+                countdown.countDown()
             }
 
             override fun onResponse(response: Response<UserQuery.Data>) {
-                val result = response.data()!!.users()!!.map {
-                    User(it.email(), id = it.id())
-                }
-                Assert.assertEquals(list, result)
+                result = response
+                countdown.countDown()
             }
 
 
         })
 
-        // TODO Try better way to test async code
-        Thread.sleep(2000)
+        // ASSERT
+        // Waits TIMEOUT millis
+        countdown.await(TIMEOUT, TimeUnit.MILLISECONDS)
+        if (result == null) {
+            Assert.fail()
+        }
+
+        val mappedUsers = result!!.data()!!.users()!!.map {
+            User(it.email(), id = it.id())
+        }
+        Assert.assertEquals(list, mappedUsers)
     }
 }

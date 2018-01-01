@@ -2,17 +2,11 @@ package app.unit.authentication
 
 import app.auhentication.AuthRequest
 import app.auhentication.Encryption
-import com.daniel.account.config.Config
 import org.junit.Assert
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mockito
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
 import javax.servlet.http.HttpServletRequest
 
-@RunWith(SpringRunner::class)
-@SpringBootTest(classes = [Config::class])
 class AuthRequestTest {
 
     private val request = Mockito.mock(HttpServletRequest::class.java)
