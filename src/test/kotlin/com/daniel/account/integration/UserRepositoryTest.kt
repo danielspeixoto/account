@@ -1,4 +1,4 @@
-package com.daniel.account.integration.repositories
+package com.daniel.account.integration
 
 import app.Application
 import app.entities.user.User
@@ -17,13 +17,13 @@ import org.springframework.test.context.junit4.SpringRunner
 class UserRepositoryTest {
 
     private val list = listOf(
-            User("a@mail.com"),
-            User("b@mail.com"),
-            User("d@mail.com")
+            User("a@mail.com", "a"),
+            User("b@mail.com", "b"),
+            User("d@mail.com", "c")
     )
 
     private val notInsertedUser = User(
-            "notinserted@mail.com"
+            "notinserted@mail.com", "n"
     )
 
     @Autowired
