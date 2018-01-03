@@ -1,5 +1,5 @@
 group 'account'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 
 buildscript {
@@ -21,6 +21,8 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath "com.apollographql.apollo:apollo-gradle-plugin:${apolloGraphqlVersion }"
+        classpath "se.transmode.gradle:gradle-docker:1.2" // <- Here
+
     }
 }
 
@@ -30,6 +32,7 @@ apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'docker'
 
 repositories {
     mavenCentral()
@@ -70,6 +73,28 @@ dependencies {
     // https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp
     compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
 
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+    compile 'org.codehaus.groovy:groovy-all'
+
+
+}
+
+task buildDocker(type: Docker) {
+    dependsOn(build)
+    baseImage = 'openjdk:latest'
+    applicationName = 'account'
+    addFile {
+        from jar
+        rename {'app.jar'}
+    }
+    defaultCommand([
+            'java',
+            '-Djava.security.egd=file:/dev/./urandom',
+            // TODO Receive as env variable
+            '-Djwt=$JWT_KEY',
+            '-jar',
+            '/app.jar'])
+    exposePort(8080)
 }
 
 def generatedOutputDir = "$buildDir/generated/source"

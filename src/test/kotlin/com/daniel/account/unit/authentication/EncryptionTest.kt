@@ -3,6 +3,7 @@ package app.unit.authentication
 import app.auhentication.Encryption
 import org.junit.Assert
 import org.junit.Test
+import org.mockito.Matchers
 import org.mockito.Mockito
 import org.springframework.core.env.Environment
 
@@ -13,7 +14,7 @@ class EncryptionTest {
     private val mockedKey = "mocked key must be large"
 
     init {
-        Mockito.`when`(environment.getProperty(Encryption.JWT_KEY))
+        Mockito.`when`(environment.getProperty(Matchers.anyString()))
                 .thenReturn(mockedKey)
         encryption = Encryption(environment)
     }

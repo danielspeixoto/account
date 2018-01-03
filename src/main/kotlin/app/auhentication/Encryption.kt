@@ -4,6 +4,7 @@ import app.helpers.Convert
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 import java.time.Instant
@@ -15,11 +16,8 @@ class Encryption @Autowired constructor(
         private val environment: Environment
 ) {
 
-    companion object {
-        val JWT_KEY = "JWT_KEY"
-    }
-
-    private val key = environment.getProperty(JWT_KEY)
+    @Value("\${jwt}")
+    lateinit private var key: String
     private val algorithm = SignatureAlgorithm.HS256
     private val maxExpiration = Date.from(
             Instant.now()
