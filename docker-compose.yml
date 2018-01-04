@@ -1,24 +1,28 @@
-version: '2'
+version: '3'
 services:
   mongodb:
      image: mongo
-     container_name: "mongodb"
-     environment:
-       - MONGO_DATA_DIR=/opt/mongo
-       - MONGO_LOG_DIR=/dev/null
-     volumes:
-       - mongo:/opt/mongo
+     networks:
+          - backend
+#     container_name: "mongodb"
+#     environment:
+#       - MONGO_DATA_DIR=/opt/mongo
+#       - MONGO_LOG_DIR=/dev/null
+#     volumes:
+#       - mongo:/opt/mongo
      ports:
-         - 27017:27017
-     command: mongod --smallfiles
+         - "27017:27017"
+#     command: mongod --smallfiles
   account:
-    #ACCOUNT
-    image: "8c059d3a834e"
-    depends_on:
-      - mongodb
-    environment:
-      - JWT_KEY=1342787847346423534
+    build: .
+#    restart: always
+    networks:
+      - backend
+#    depends_on:/
+#      - mongodb
+#    environment:
+#      - JWT_KEY: "1342787847346423534"
     ports:
       - "8080:8080"
-volumes:
-  mongo:
+networks:
+  backend:

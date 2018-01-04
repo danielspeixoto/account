@@ -79,23 +79,7 @@ dependencies {
 
 }
 
-task buildDocker(type: Docker) {
-    dependsOn(build)
-    baseImage = 'openjdk:latest'
-    applicationName = 'account'
-    addFile {
-        from jar
-        rename {'app.jar'}
-    }
-    defaultCommand([
-            'java',
-            '-Djava.security.egd=file:/dev/./urandom',
-            // TODO Receive as env variable
-            '-Djwt=$JWT_KEY',
-            '-jar',
-            '/app.jar'])
-    exposePort(8080)
-}
+jar.baseName = 'account'
 
 def generatedOutputDir = "$buildDir/generated/source"
 
