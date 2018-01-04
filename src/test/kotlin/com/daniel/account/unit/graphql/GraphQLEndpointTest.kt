@@ -7,7 +7,7 @@ import app.entities.user.UserResolver
 import app.graphql.AuthContext
 import app.graphql.GraphQLEndpoint
 import app.graphql.QueryResolver
-import com.daniel.account.config.Config
+import com.daniel.account.config.UnitConfig
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @RunWith(SpringRunner::class)
-@SpringBootTest(classes = [Config::class])
+@SpringBootTest(classes = [UnitConfig::class])
 class GraphQLEndpointTest {
 
     @Autowired
