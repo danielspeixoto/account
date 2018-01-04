@@ -1,8 +1,8 @@
 package com.daniel.account.integration.repositories
 
-import app.Application
 import app.entities.user.User
 import app.entities.user.UserRepository
+import com.daniel.account.config.IntegrationConfig
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 
 @RunWith(SpringRunner::class)
-@SpringBootTest(classes = [Application::class])
+@SpringBootTest(classes = [IntegrationConfig::class])
 class UserRepositoryTest {
 
     private val list = listOf(

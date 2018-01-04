@@ -3,18 +3,14 @@ package app.auhentication
 import app.helpers.Convert
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 import java.time.Instant
 import java.util.*
 
 
 @Component
-class Encryption @Autowired constructor(
-        private val environment: Environment
-) {
+class Encryption {
 
     @Value("\${jwt}")
     lateinit private var key: String

@@ -9,6 +9,7 @@ graphiql:
   endpoint: /graphql
   enabled: true
 
-#spring.data.mongodb.uri: mongodb://mongo:27017
-#spring.data.mongodb.database: account
-spring.data.mongodb.auto-connect-retry: true
+spring:
+  data:
+    mongodb:
+      auto-connect-retry: true
