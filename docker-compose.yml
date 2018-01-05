@@ -4,25 +4,45 @@ services:
      image: mongo
      networks:
           - backend
-#     container_name: "mongodb"
-#     environment:
-#       - MONGO_DATA_DIR=/opt/mongo
-#       - MONGO_LOG_DIR=/dev/null
-#     volumes:
-#       - mongo:/opt/mongo
      ports:
-         - "27017:27017"
-#     command: mongod --smallfiles
+         - 27017:27017
   account:
     build: .
-#    restart: always
+    restart: always
     networks:
       - backend
-#    depends_on:/
-#      - mongodb
-#    environment:
-#      - JWT_KEY: "1342787847346423534"
+    environment:
+      JWT_KEY: "1342787847346423534"
     ports:
-      - "8080:8080"
+      - 8080:8080
+  rabbitmq:
+    image: rabbitmq:management
+    networks:
+        - backend
+    ports:
+      - 5672:5672
+      - 15672:15672
+  elasticsearch:
+    image: elasticsearch
+    networks:
+      - backend
+    ports:
+      - 9200:9200
+      - 9300:9300
+  kibana:
+    image: kibana
+    networks:
+      - backend
+    ports:
+      - 5601:5601
+  logstash:
+    image: logstash
+    volumes:
+      - /opt/elk/logstash:/opt/config/
+    command: logstash -f /opt/config/logstash.conf
+    networks:
+      - backend
+    ports:
+      - 7000:5000
 networks:
   backend:

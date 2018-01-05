@@ -73,8 +73,8 @@ dependencies {
     // https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp
     compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
 
-    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
-    compile 'org.codehaus.groovy:groovy-all'
+    // Message System
+    compile("org.springframework.boot:spring-boot-starter-amqp")
 
 
 }

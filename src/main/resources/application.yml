@@ -13,3 +13,9 @@ spring:
   data:
     mongodb:
       auto-connect-retry: true
+  rabbit:
+    connection-factory:
+      host: rabbitmq
+      port: 5672
+      username: guest
+      password: guest
