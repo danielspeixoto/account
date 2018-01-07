@@ -1,0 +1,92 @@
+{
+  "rabbit_version": "3.7.2",
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "72HP1CHeT4BEAI+GJNqzXXIa8+8mNoVDiAO/DReqkxgI1Kto",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    },
+    {
+      "name": "test",
+      "password_hash": "TX/Kf/fJmPtcVN4RUj+tYNA8vmADA3tH7NrqJGzkXz9Pd5e/",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "test",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [
+    {
+      "user": "test",
+      "vhost": "/",
+      "exchange": "ex_logstash",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "test",
+      "vhost": "/",
+      "exchange": "",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "rabbit@2cd1e9230990"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "q_logstash",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "ex_logstash",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "ex_logstash",
+      "vhost": "/",
+      "destination": "q_logstash",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    }
+  ]
+}

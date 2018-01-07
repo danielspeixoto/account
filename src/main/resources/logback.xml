@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                {"time": "%date{ISO8601}", "thread": "%thread", "level": "%level", "class": "%logger{36}", "message":
+                "%message"}\n
+            </pattern>
+        </encoder>
+    </appender>
+
     <appender name="AMQP"
               class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
