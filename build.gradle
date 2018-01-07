@@ -74,7 +74,7 @@ dependencies {
     compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
 
     // Message System
-    compile("org.springframework.boot:spring-boot-starter-amqp")
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '1.5.9.RELEASE'
 
 
 }

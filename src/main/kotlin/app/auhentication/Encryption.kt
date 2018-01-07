@@ -12,7 +12,7 @@ import java.util.*
 @Component
 class Encryption {
 
-    @Value("\${jwt}")
+    @Value("\${JWT}")
     lateinit private var key: String
     private val algorithm = SignatureAlgorithm.HS256
     private val maxExpiration = Date.from(

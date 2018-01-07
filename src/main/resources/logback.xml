@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>
-                {"time": "%date{ISO8601}", "thread": "%thread", "level": "%level", "class": "%logger{36}", "message":
-                "%message"}\n
-            </pattern>
-        </encoder>
-    </appender>
-
     <appender name="AMQP"
               class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
@@ -27,11 +18,10 @@
         <!-- RabbitMQ connection -->
         <host>rabbitmq</host>
         <port>5672</port>
-        <username>guest</username>
-        <password>guest</password>
+        <username>${BROKER_USERNAME}</username>
+        <password>${BROKER_PASSWORD}</password>
 
-        <applicationId>api-service-4</applicationId>
-        <routingKeyPattern>api-service-4</routingKeyPattern>
+        <applicationId>account</applicationId>
         <declareExchange>true</declareExchange>
         <exchangeType>direct</exchangeType>
         <exchangeName>ex_logstash</exchangeName>

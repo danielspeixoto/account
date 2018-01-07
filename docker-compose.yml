@@ -1,48 +1,77 @@
 version: '3'
 services:
-  mongodb:
-     image: mongo
+  # ACCOUNT APP
+  accountdb:
+     build: db
+     volumes:
+       - /opt/accountdb:/opt/data
      networks:
-          - backend
+        - accountpersistence
      ports:
-         - 27017:27017
+       - 27017:27017
+
   account:
     build: .
-    restart: always
     networks:
-      - backend
+      - accountpersistence
+      - broker
     environment:
-      JWT_KEY: "1342787847346423534"
+      JWT: 1342787847346423534
+    depends_on:
+      - accountdb
+      - rabbitmq
     ports:
       - 8080:8080
+
+  # BROKER
   rabbitmq:
     image: rabbitmq:management
     networks:
-        - backend
+      - broker
+    volumes:
+      - /opt/rabbitmq:/opt/rabbitmq
     ports:
+      # MESSAGES
       - 5672:5672
+      # MANAGEMENT UI
       - 15672:15672
+
+  # ELK STACK
   elasticsearch:
     image: elasticsearch
+    volumes:
+      - /opt/elk/elasticsearch:/opt/config/
     networks:
-      - backend
+      - elk
     ports:
       - 9200:9200
       - 9300:9300
+
   kibana:
     image: kibana
+    depends_on:
+      - elasticsearch
+    volumes:
+      - /opt/elk/kibana:/opt/config/
     networks:
-      - backend
+      - elk
     ports:
       - 5601:5601
+
   logstash:
     image: logstash
     volumes:
       - /opt/elk/logstash:/opt/config/
     command: logstash -f /opt/config/logstash.conf
     networks:
-      - backend
+      - elk
+      - broker
+    depends_on:
+      - elasticsearch
     ports:
       - 7000:5000
+
 networks:
-  backend:
+  accountpersistence:
+  elk:
+  broker:

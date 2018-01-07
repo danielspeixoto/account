@@ -9,13 +9,11 @@ graphiql:
   endpoint: /graphql
   enabled: true
 
+logging:
+  config:
+     classpath: "logback.xml"
+
 spring:
   data:
     mongodb:
       auto-connect-retry: true
-  rabbit:
-    connection-factory:
-      host: rabbitmq
-      port: 5672
-      username: guest
-      password: guest

@@ -5,4 +5,6 @@ spring:
       port: 27017
       database: account
 
-jwt: default-jwt-for-testing
+JWT: default-jwt-for-testing
+BROKER_USERNAME: guest
+BROKER_PASSWORD: guest

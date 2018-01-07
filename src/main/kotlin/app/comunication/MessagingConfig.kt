@@ -5,9 +5,11 @@ import org.springframework.amqp.core.Binding
 import org.springframework.amqp.core.BindingBuilder
 import org.springframework.amqp.core.Queue
 import org.springframework.amqp.core.TopicExchange
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 
@@ -18,6 +20,11 @@ class MessagingConfig {
     companion object {
         const val QUEUE_NAME = Application.NAME
         const val EXCHANGE = "$QUEUE_NAME-exchange"
+
+        @Value("\${BROKER_USERNAME}")
+        lateinit var USERNAME: String
+        @Value("\${BROKER_PASSWORD}")
+        lateinit var PASSWORD: String
     }
 
     @Bean
@@ -43,6 +50,14 @@ class MessagingConfig {
         container.setQueueNames(QUEUE_NAME)
         container.messageListener = listenerAdapter
         return container
+    }
+
+    @Bean
+    fun connectionFactory(): ConnectionFactory {
+        val connectionFactory = CachingConnectionFactory("rabbitmq")
+        connectionFactory.username = USERNAME
+        connectionFactory.setPassword(PASSWORD)
+        return connectionFactory
     }
 
     @Bean
